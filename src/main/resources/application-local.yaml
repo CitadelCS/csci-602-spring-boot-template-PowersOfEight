@@ -21,7 +21,7 @@ spring:
     name: csci-602
   datasource:
     password: default
-    url: jdbc/:postgresql://localhost:5432/csci602db
+    url: jdbc:postgresql://localhost:5432/csci602db
     username: postgres
   mvc:
     servlet:
