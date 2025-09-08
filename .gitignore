@@ -25,3 +25,8 @@
 /nbdist/
 /.nb-gradle/
 /build/
+
+
+### local files ###
+.env
+.local/
