@@ -29,6 +29,7 @@ public class StepDefinitions {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+
     @Given("the application is running")
     public void the_application_is_running() {
         System.out.println("the application is running on port " + port);
