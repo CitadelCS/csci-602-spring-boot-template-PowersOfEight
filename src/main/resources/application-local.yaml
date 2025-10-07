@@ -21,11 +21,13 @@ spring:
     name: csci-602
   datasource:
     password: default
-    url: jdbc:postgresql://localhost:5432/csci602db
+    url: jdbc:postgresql://${WSL_IP}:5432/csci602db
     username: postgres
   mvc:
     servlet:
       load-on-startup: 1
+  flyway:
+    baseline-on-migrate: true
 springdoc:
   packagesToScan: edu.citadel.api
   pathsToMatch: /v1, /**
