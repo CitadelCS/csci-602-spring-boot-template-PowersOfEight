@@ -19,7 +19,3 @@ Feature: Account Creation
     | last_login|
     And I can store the account details for other scenarios
     And the account should exist in the database
-#    When I send a GET request to the "/account/{user_id}" endpoint
-#    Then the response status code should be 200
-#    And the response should be equal to the account details returned from the POST request
-#    When I send a GET request to
