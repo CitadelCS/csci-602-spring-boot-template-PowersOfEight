@@ -27,6 +27,7 @@ spring:
     servlet:
       load-on-startup: 1
   flyway:
+    enabled: false
     baseline-on-migrate: true
 springdoc:
   packagesToScan: edu.citadel.api
