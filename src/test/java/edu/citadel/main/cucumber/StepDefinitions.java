@@ -22,6 +22,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -82,7 +84,17 @@ public class StepDefinitions {
         }
         String url = baseUrl + path;
         LOGGER.debug("Sending request to URL: " + url);
-        response = restTemplate.getForEntity(url, String.class);
+        try{
+            response = restTemplate.getForEntity(url, String.class);
+        } catch (RestClientException e){
+            if (e instanceof HttpClientErrorException){
+                response = ResponseEntity
+                            .status(((HttpClientErrorException) e).getStatusCode())
+                            .body(((HttpClientErrorException) e).getResponseBodyAsString());
+            } else {
+                throw e;
+            }
+        }
     }
 
     @Then("the response status code should be {int}")
