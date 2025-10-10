@@ -62,8 +62,8 @@ public class StepDefinitions {
     @Given("the application is running")
     public void the_application_is_running() {
         assertTrue(context.getBeanDefinitionCount() > 0, "Application context should have beans");
-        LOGGER.info("Application context loaded with {} beans", context.getBeanDefinitionCount());
-        LOGGER.info("The application is running on port {}", port);
+        LOGGER.debug("Application context loaded with {} beans", context.getBeanDefinitionCount());
+        LOGGER.debug("The application is running on port {}", port);
         baseUrl = "http://localhost:" + port;
     }
 
@@ -81,14 +81,14 @@ public class StepDefinitions {
             path = path.replace("{username}", createdAccount.getUsername());
         }
         String url = baseUrl + path;
-        LOGGER.info("Sending request to URL: " + url);
+        LOGGER.debug("Sending request to URL: " + url);
         response = restTemplate.getForEntity(url, String.class);
     }
 
     @Then("the response status code should be {int}")
     public void the_response_status_code_should_be(Integer int1) {
         int actualStatusCode = response.getStatusCode().value();
-        LOGGER.info("Actual status code: {}", actualStatusCode);
+        LOGGER.debug("Actual status code: {}", actualStatusCode);
         org.junit.jupiter.api.Assertions.assertEquals(int1.intValue(), actualStatusCode);
     }
 
@@ -137,11 +137,11 @@ public class StepDefinitions {
         if (cucumberTestContext.containsKey("createdAccount")) {
             Account created = cucumberTestContext.get("createdAccount", Account.class);
             accountRepository.deleteById(created.getUser_id());
-            LOGGER.info("Deleted account with ID: {}", created.getUser_id());
+            LOGGER.debug("Deleted account with ID: {}", created.getUser_id());
         } else {
             throw new CucumberException("No account found in test context to delete from the database");
         }
-        LOGGER.info("Cleaned up test accounts from the database");
+        LOGGER.debug("Cleaned up test accounts from the database");
     }
 
 
